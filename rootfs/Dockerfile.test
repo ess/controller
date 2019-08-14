@@ -1,0 +1,16 @@
+FROM ruby:2.5
+
+RUN apt-get update && apt-get install -y \
+  build-essential \
+  wamerican \
+  gcc \
+  g++ \
+  make
+
+RUN mkdir -p /app
+WORKDIR /app
+
+COPY . ./
+RUN gem install bundler --version '= 1.16.6' && bundle install
+
+CMD ["bundle", "exec", "rake"]
