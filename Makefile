@@ -45,17 +45,18 @@ commit-hook:
 full-clean: check-docker
 	docker images -q $(IMAGE_PREFIX)$(COMPONENT) | xargs docker rmi -f
 
-test: test-style test-unit test-functional
+test: test-outside test-inside
 
 test-style: docker-build-test
 	docker run -v ${CURDIR}:/test -w /test/rootfs ${IMAGE}.test /test/rootfs/bin/test-style
 	${SHELLCHECK_PREFIX} $(SHELL_SCRIPTS)
 
-test-unit: docker-build-test
-	docker run -v ${CURDIR}:/test -w /test/rootfs ${IMAGE}.test /test/rootfs/bin/test-unit
+test-outside: docker-build-test
+	docker run -v ${CURDIR}:/test -w /test/rootfs ${IMAGE}.test /test/rootfs/bin/test-outside
 
-test-functional:
-	@echo "Implement functional tests in _tests directory"
+test-inside: docker-build-test
+	#docker run -v ${CURDIR}:/test -w /test/rootfs ${IMAGE}.test /test/rootfs/bin/test-inside
+	@echo "Implement unit tests in spec directory"
 
 test-integration:
 	@echo "Check https://github.com/deisthree/workflow-e2e for the complete integration test suite"
