@@ -4,42 +4,54 @@ One may retrieve the controller's health via either a `GET` request or a `HEAD` 
 
 This endpoint should always return a successful response with these verbs, but any other verb is explicitly disallowed.
 
-* **URI**
+## URI ##
 
 `/healthz`
 
-* **Method(s):**
+## Method(s) ##
 
-`GET`, `HEAD`
+* `GET`
+* `HEAD`
 
-* **Authentication:**
-
-None
-
-* **Data Params:**
+## Authentication ##
 
 None
 
-* **Success Response:**
+## Data Params ##
 
-  * **Code:** 200<br />
-    **Content:**
+None
 
-    OK
+## Success Response ##
 
-* **Error Response:**
+### Code ###
 
-  * **Code:** 405<br />
-    **Content:**
+`200`
 
-    This method is not allowed
+### Content Type ###
 
-* **Sample Calls:**
+`text/html`
 
-  ```
-  curl http://example.com/healthz
-  ```
+### Content ###
 
-  ```
-  curl -X HEAD http://example.com/healthz
-  ```
+```html
+OK
+```
+
+## Error Responses ##
+
+### Code ###
+
+`405`
+
+### Content Type ###
+
+`text/html`
+
+### Content ###
+
+None
+
+## Sample Calls ##
+
+* `curl http://example.com/healthz`
+* `curl -X HEAD http://example.com/healthz`
