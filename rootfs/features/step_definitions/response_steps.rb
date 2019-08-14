@@ -12,3 +12,12 @@ Then 'the response includes the magic DEIS headers' do
     expect(present).to include('DEIS_PLATFORM_VERSION')
   end
 end
+
+Then 'the JSON body in the response is as follows:' do |body|
+  expect(response.content_type).to eql('application/json')
+
+  expected = JSON.parse(body)
+  actual = JSON.parse(response.body)
+
+  expect(actual).to eql(expected)
+end
