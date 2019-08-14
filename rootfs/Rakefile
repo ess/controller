@@ -1,7 +1,6 @@
-#require 'rom/sql/rake_task'
+require 'cucumber/rake/task'
 
-#namespace :db do
-  #task :setup do
+desc "Run Cucumber suite"
+Cucumber::Rake::Task.new
 
-  #end
-#end
+task :default => :cucumber
