@@ -6,6 +6,10 @@ Wrapp = Syro.new do
   on "healthz" do
     run HealthCheck::Application
   end
+
+  on "readiness" do
+    run HealthCheck::Application
+  end
 end
 
 Application = Rack::Builder.new do
