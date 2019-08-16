@@ -104,6 +104,25 @@ When the controller is configured to not allow registration beyond the initial a
 {"detail":"Authentication credentials were not provided."}
 ```
 
+## Non-Admin User Attempts To Create A User ##
+
+Whether registration is opened or closed, if a non-admin attempts to register another user while authenticated, the request fails with a message regarding lacking permissions.
+
+#### Code ####
+
+`403`
+
+#### Content Type ####
+
+`application/json`
+
+#### Content ####
+
+```json
+{"detail":"You do not have permission to perform this action."}
+```
+
+
 ### Missing Username ###
 
 If a username is not provided in the data payload for the request, the request fails and an error regarding the missing username is presented.
