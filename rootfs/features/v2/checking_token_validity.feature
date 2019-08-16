@@ -6,7 +6,6 @@ Feature: Checking Token Validity
     Given I have valid authentication information
     When I GET /v2/ with authentication
     Then the response status is 200
-    And the response includes the magic DEIS headers
     And the JSON body in the response is as follows:
     """
     {}
@@ -16,7 +15,6 @@ Feature: Checking Token Validity
   Scenario: I don't provide a token
     When I GET /v2/ without authentication
     Then the response status is 401
-    And the response includes the magic DEIS headers
     And the JSON body in the response is as follows:
     """
     {
@@ -29,7 +27,6 @@ Feature: Checking Token Validity
     Given I have invalid authentication information
     When I GET /v2/ with authentication
     Then the response status is 401
-    And the response includes the magic DEIS headers
     And the JSON body in the response is as follows:
     """
     {
