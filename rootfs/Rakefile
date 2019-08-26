@@ -4,3 +4,12 @@ desc "Run Cucumber suite"
 Cucumber::Rake::Task.new
 
 task :default => :cucumber
+
+require 'rom/sql/rake_task'
+
+require_relative 'system/controller/container'
+namespace :db do
+  task :setup do
+    Controller::Container.start :rom
+  end
+end

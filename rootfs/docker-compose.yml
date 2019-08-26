@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres/controller
+    command: bundle exec rake spec
+    volumes:
+      - .:/app
+    links:
+      - postgres
+
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=controller
