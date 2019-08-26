@@ -34,3 +34,19 @@ When %r{^I GET (.+) without authentication$} do |path|
   end
 end
 
+When %r{^I POST my payload to (.+) with authentication$} do |path|
+  with_authentication do
+    with_json_body do
+      set_response(post(path, JSON.dump(payload)))
+    end
+  end
+end
+
+
+When %r{^I POST my payload to (.+) without authentication$} do |path|
+  without_authentication do
+    with_json_body do
+      set_response(post(path, JSON.dump(payload)))
+    end
+  end
+end
