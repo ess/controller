@@ -1,12 +1,15 @@
-#begin
-  #require 'database_cleaner'
-  #require 'database_cleaner/cucumber'
+require_relative '../../system/boot'
 
-  #DatabaseCleaner.strategy = :truncation
-#rescue NameError
-  #raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
-#end
+require 'database_cleaner'
 
-#Around do |scenario, block|
-  #DatabaseCleaner.cleaning(&block)
-#end
+conn = Controller::Container['persistence.rom'].gateways[:default].connection
+
+DatabaseCleaner.allow_remote_database_url = true
+DatabaseCleaner[:sequel, connection: conn].strategy = :transaction
+DatabaseCleaner[:sequel, connection: conn].clean_with(:truncation)
+
+Around do |scenario, block|
+  conn = Controller::Container['persistence.rom'].gateways[:default].connection
+
+  DatabaseCleaner[:sequel, connection: conn].cleaning(&block)
+end
